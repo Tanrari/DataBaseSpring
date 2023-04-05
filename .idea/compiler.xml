@@ -2,7 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
-      <module name="DataBaseSpring" target="1.5" />
+      <module name="DataBaseSpring" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>
