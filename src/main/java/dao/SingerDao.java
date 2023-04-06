@@ -1,3 +1,7 @@
+package dao;
+
+import dto.Singer;
+
 import java.util.List;
 
 public interface SingerDao {
