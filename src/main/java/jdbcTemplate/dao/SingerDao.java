@@ -1,6 +1,6 @@
-package dao;
+package jdbcTemplate.dao;
 
-import dto.Singer;
+import jdbcTemplate.dto.Singer;
 
 import java.util.List;
 
@@ -14,5 +14,6 @@ public interface SingerDao {
     void delete(Long singerId);
     List<Singer> findAllWithDetail();
     void insertWithDetail(Singer singer);
+    String findNameById(Long id);
 
 }
