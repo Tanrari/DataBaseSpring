@@ -1,5 +1,7 @@
 package config;
 
+import dao.PlainSingerDao;
+import dao.SingerDao;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,11 +39,18 @@ public class DbConfig {
             dataSource.setUrl(url);
             dataSource.setUsername(userName);
             dataSource.setPassword(password);
+
             return dataSource;
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public SingerDao singerDao(){
+       PlainSingerDao dao = new PlainSingerDao();
+//        dao.setDataSource(dataSource());
+        return dao;
     }
 }

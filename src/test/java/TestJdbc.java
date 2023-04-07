@@ -1,3 +1,4 @@
+
 import dao.PlainSingerDao;
 import dao.SingerDao;
 import dto.Singer;
@@ -12,7 +13,7 @@ public class TestJdbc {
         Singer singer = new Singer();
         singer.setBirthDate(new Date(new GregorianCalendar(1991,2,3)
                 .getTime().getTime()));
-        singer.setFirstName("Lucas");
+        singer.setFirstName("Lucas1");
         singer.setLastName("Sheerah");
         dao.insert(singer);
     }

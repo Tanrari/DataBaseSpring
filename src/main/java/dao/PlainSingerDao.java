@@ -1,5 +1,7 @@
 package dao;
 
+import dto.Singer;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -122,5 +124,10 @@ public class PlainSingerDao implements SingerDao {
 
     public void insertWithDetail(Singer singer) {
 
+    }
+
+    @Override
+    public String findNameById(Long id) {
+        return null;
     }
 }
