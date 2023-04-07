@@ -1,7 +1,6 @@
 package jdbcTemplate.dao;
 
-import dao.SingerDao;
-import dto.Singer;
+import jdbcTemplate.dto.Singer;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;

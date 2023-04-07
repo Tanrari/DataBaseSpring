@@ -1,4 +1,4 @@
-import dao.SingerDao;
+import jdbcTemplate.dao.SingerDao;
 import jdbcTemplate.config.EmbeddedJdbcConfig;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

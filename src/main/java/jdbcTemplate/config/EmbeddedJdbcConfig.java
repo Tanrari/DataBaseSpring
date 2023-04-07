@@ -2,7 +2,7 @@ package jdbcTemplate.config;
 
 import com.sun.org.slf4j.internal.Logger;
 import com.sun.org.slf4j.internal.LoggerFactory;
-import dao.SingerDao;
+import jdbcTemplate.dao.SingerDao;
 import jdbcTemplate.dao.JdbcSingerDao;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

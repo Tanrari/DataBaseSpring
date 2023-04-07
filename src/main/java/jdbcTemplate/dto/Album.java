@@ -1,4 +1,4 @@
-package dto;
+package jdbcTemplate.dto;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -43,7 +43,7 @@ public class Album implements Serializable {
 
     @Override
     public String toString() {
-        return "dto.Album{" +
+        return "jdbcTemplate.dto.Album{" +
                 "id=" + id +
                 ", singerId=" + singerId +
                 ", title='" + title + '\'' +

@@ -1,7 +1,7 @@
 
 import dao.PlainSingerDao;
-import dao.SingerDao;
-import dto.Singer;
+import jdbcTemplate.dao.SingerDao;
+import jdbcTemplate.dto.Singer;
 
 import java.sql.Date;
 import java.util.GregorianCalendar;

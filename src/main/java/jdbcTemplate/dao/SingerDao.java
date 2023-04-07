@@ -1,6 +1,6 @@
-package dao;
+package jdbcTemplate.dao;
 
-import dto.Singer;
+import jdbcTemplate.dto.Singer;
 
 import java.util.List;
 

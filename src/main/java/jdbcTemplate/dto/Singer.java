@@ -1,4 +1,4 @@
-package dto;
+package jdbcTemplate.dto;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -69,7 +69,7 @@ public class Singer implements Serializable {
 
     @Override
     public String toString() {
-        return "dto.Singer{" +
+        return "jdbcTemplate.dto.Singer{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
