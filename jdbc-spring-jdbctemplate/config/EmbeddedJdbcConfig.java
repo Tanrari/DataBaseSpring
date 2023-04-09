@@ -1,12 +1,12 @@
-package jdbcTemplate.config;
+package config;
 
 import com.sun.org.slf4j.internal.Logger;
 import com.sun.org.slf4j.internal.LoggerFactory;
-import jdbcTemplate.dao.SingerDao;
-import jdbcTemplate.dao.JdbcSingerDao;
+import dao.SingerDao;
+import dao.JdbcSingerDao;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
@@ -27,9 +27,9 @@ public class EmbeddedJdbcConfig {
         }
     }
     @Bean
-    public JdbcTemplate jdbcTemplate(){
-        JdbcTemplate jdbcTemplate = new JdbcTemplate();
-        jdbcTemplate.setDataSource(dataSource());
+    public NamedParameterJdbcTemplate jdbcTemplate(){
+        NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(dataSource());
+//        jdbcTemplate.setDataSource(dataSource());
         return jdbcTemplate;
     }
     @Bean
@@ -37,5 +37,11 @@ public class EmbeddedJdbcConfig {
         JdbcSingerDao dao = new JdbcSingerDao();
         dao.setTemplate(jdbcTemplate());
         return dao;
+    }
+    @Bean
+    public JdbcSingerDaoWithRowMapper singerDaoWithRowMapper(){
+        JdbcSingerDaoWithRowMapper daoWithRowMapper = new JdbcSingerDaoWithRowMapper();
+        daoWithRowMapper.setTemplate(jdbcTemplate());
+        return daoWithRowMapper;
     }
 }

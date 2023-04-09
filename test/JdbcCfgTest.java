@@ -1,5 +1,6 @@
-import jdbcTemplate.dao.SingerDao;
-import jdbcTemplate.config.EmbeddedJdbcConfig;
+import dao.JdbcSingerDao;
+import dao.SingerDao;
+import config.EmbeddedJdbcConfig;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
@@ -13,7 +14,7 @@ public class JdbcCfgTest {
         GenericApplicationContext ctx =new AnnotationConfigApplicationContext(EmbeddedJdbcConfig.class);
 
 //        ctx.refresh();
-        testDao(ctx.getBean(SingerDao.class));
+        testDao(ctx.getBean(JdbcSingerDao.class));
         ctx.close();
 
     }
