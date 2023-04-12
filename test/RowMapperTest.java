@@ -1,4 +1,5 @@
 import config.EmbeddedJdbcConfig;
+import config.JdbcSingerDaoWithRowMapper;
 import dao.SingerDao;
 import dto.Album;
 import dto.Singer;
