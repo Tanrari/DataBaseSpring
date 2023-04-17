@@ -15,12 +15,14 @@ public class JdbcSingerDao implements SingerDao {
     private DataSource dataSource;
     private SelectAllSingers selectAllSingers;
     private SelectSingerByFirstName selectSingerByFirstName;
+    private  UpdateSinger updateSinger;
 
     @Resource(name = "dataSource")
     public void setDataSource (DataSource dataSource){
         this.dataSource= dataSource;
         this.selectAllSingers = new SelectAllSingers(dataSource);
         this.selectSingerByFirstName = new SelectSingerByFirstName(dataSource);
+        this.updateSinger = new UpdateSinger(dataSource);
     }
     @Override
     public List<Singer> findAll() {
@@ -52,6 +54,13 @@ public class JdbcSingerDao implements SingerDao {
 
     @Override
     public void update(Singer singer) {
+        Map<String,Object> paramMap = new HashMap<String,Object>();
+        paramMap.put("first_name",singer.getFirstName());
+        paramMap.put("last_name",singer.getLastName());
+        paramMap.put("birth_date",singer.getBirthDate());
+        paramMap.put("id",singer.getId());
+        updateSinger.updateByNamedParam(paramMap);
+
 
     }
 

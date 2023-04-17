@@ -9,6 +9,8 @@ import org.springframework.context.support.GenericApplicationContext;
 import work.AppConfigMappingSqlQuerry;
 
 import javax.annotation.Resource;
+import java.sql.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -44,6 +46,18 @@ public class AnnotationJdbcTest {
     });
         ctx.close();
         }
+    @Test
+    public void testSingerUpdate(){
+        Singer singer = new Singer();
+        singer.setId(1L);
+        singer.setFirstName("John Clayton");
+        singer.setLastName("Mayer");
+        singer.setBirthDate(new Date(
+                (new GregorianCalendar(1977,9,16)).getTime().getTime()));
+        singerDao.update(singer);
+        List<Singer> singers = singerDao.findAll();
+        listSingers(singers);
+    }
     @After
     public void tearDown(){
         ctx.close();
@@ -59,6 +73,8 @@ public class AnnotationJdbcTest {
             }
         });
     }
+
+
 }
 
 
