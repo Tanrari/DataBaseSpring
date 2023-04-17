@@ -6,16 +6,21 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @Repository("singerDao")
 public class JdbcSingerDao implements SingerDao {
     private DataSource dataSource;
     private SelectAllSingers selectAllSingers;
+    private SelectSingerByFirstName selectSingerByFirstName;
 
     @Resource(name = "dataSource")
     public void setDataSource (DataSource dataSource){
         this.dataSource= dataSource;
         this.selectAllSingers = new SelectAllSingers(dataSource);
+        this.selectSingerByFirstName = new SelectSingerByFirstName(dataSource);
     }
     @Override
     public List<Singer> findAll() {
@@ -24,7 +29,10 @@ public class JdbcSingerDao implements SingerDao {
 
     @Override
     public List<Singer> findByFirstName(String firstName) {
-        return null;
+        Map<String,Object> paramMap = new HashMap<>();
+        paramMap.put("first_name",firstName);
+
+        return selectSingerByFirstName.executeByNamedParam(paramMap);
     }
 
     @Override

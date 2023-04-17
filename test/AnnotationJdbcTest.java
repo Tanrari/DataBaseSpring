@@ -23,7 +23,13 @@ public class AnnotationJdbcTest {
         assertNotNull(singerDao);
 
     }
-
+    @Test
+    public void selectSingerByFirstName(){
+        List<Singer> singers = singerDao.findByFirstName("John");
+        assertTrue(singers.size()==2);
+        listSingers(singers);
+        ctx.close();
+    }
     @Test
     public void  testFindAll(){
     List<Singer> singers = singerDao.findAll();
@@ -41,6 +47,17 @@ public class AnnotationJdbcTest {
     @After
     public void tearDown(){
         ctx.close();
+    }
+
+    private void listSingers(List<Singer> singers){
+        singers.forEach(singer -> {
+            System.out.println(singer);
+            if (singer.getAlbums()!=null){
+                for (Album album: singer.getAlbums()){
+                    System.out.println("\t-->"+album);
+                }
+            }
+        });
     }
 }
 
