@@ -2,6 +2,8 @@ package work;
 
 import dao.SingerDao;
 import dto.Singer;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -15,6 +17,7 @@ public class JdbcSingerDao implements SingerDao {
     private DataSource dataSource;
     private SelectAllSingers selectAllSingers;
     private SelectSingerByFirstName selectSingerByFirstName;
+    private InsertSinger insertSinger;
     private  UpdateSinger updateSinger;
 
     @Resource(name = "dataSource")
@@ -23,6 +26,7 @@ public class JdbcSingerDao implements SingerDao {
         this.selectAllSingers = new SelectAllSingers(dataSource);
         this.selectSingerByFirstName = new SelectSingerByFirstName(dataSource);
         this.updateSinger = new UpdateSinger(dataSource);
+        this.insertSinger = new InsertSinger(dataSource);
     }
     @Override
     public List<Singer> findAll() {
@@ -49,6 +53,15 @@ public class JdbcSingerDao implements SingerDao {
 
     @Override
     public void insert(Singer singer) {
+        Map<String,Object> paramMap = new HashMap<>();
+        paramMap.put("first_name",singer.getFirstName());
+        paramMap.put("last_name",singer.getLastName());
+        paramMap.put("birth_date",singer.getBirthDate());
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        insertSinger.updateByNamedParam(paramMap,keyHolder);
+        singer.setId(keyHolder.getKey().longValue());
+
+
 
     }
 
