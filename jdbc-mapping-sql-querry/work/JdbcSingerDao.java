@@ -1,7 +1,9 @@
 package work;
 
 import dao.SingerDao;
+import dto.Album;
 import dto.Singer;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -19,6 +21,7 @@ public class JdbcSingerDao implements SingerDao {
     private SelectSingerByFirstName selectSingerByFirstName;
     private InsertSinger insertSinger;
     private  UpdateSinger updateSinger;
+    private InsertSingerAlbum insertSingerAlbum;
 
     @Resource(name = "dataSource")
     public void setDataSource (DataSource dataSource){
@@ -27,6 +30,7 @@ public class JdbcSingerDao implements SingerDao {
         this.selectSingerByFirstName = new SelectSingerByFirstName(dataSource);
         this.updateSinger = new UpdateSinger(dataSource);
         this.insertSinger = new InsertSinger(dataSource);
+
     }
     @Override
     public List<Singer> findAll() {
@@ -94,11 +98,40 @@ public class JdbcSingerDao implements SingerDao {
 
     @Override
     public List<Singer> findAllWithAlbum() {
-        return null;
+        JdbcTemplate template = new JdbcTemplate(dataSource);
+        String sql ="select s.id, s.first_name, s.last_name, s.birth_date" +
+                ", a.id as album_id, a.title, a.release_date from singer s " +
+                "left join album a on s.id = a.singer_id";
+        return template.query(sql, new dao.JdbcSingerDao.SingerWithDetailExtractor());
     }
 
     @Override
     public String findNameById(Long id) {
         return null;
+    }
+
+    @Override
+    public void insertWithAlbum(Singer singer) {
+     this.insertSingerAlbum = new InsertSingerAlbum(dataSource);
+     Map<String,Object> paramMap = new HashMap<>();
+     paramMap.put("first_name",singer.getFirstName());
+     paramMap.put("last_name",singer.getLastName());
+     paramMap.put("birth_date", singer.getBirthDate());
+     KeyHolder keyHolder = new GeneratedKeyHolder();
+     insertSinger.updateByNamedParam(paramMap,keyHolder);
+     singer.setId(keyHolder.getKey().longValue());
+     List<Album> albums = singer.getAlbums();
+     if (albums!=null){
+         for (Album album: albums){
+             paramMap = new HashMap<>();
+             paramMap.put("singer_id",singer.getId());
+             paramMap.put("title",album.getTitle());
+             paramMap.put("release_date",album.getReleaseDate());
+             insertSingerAlbum.updateByNamedParam(paramMap);
+
+         }
+     }
+    insertSingerAlbum.flush();
+
     }
 }

@@ -58,4 +58,9 @@ public class JdbcSingerDaoAnot implements SingerDao {
     public String findNameById(Long id) {
         return null;
     }
+
+    @Override
+    public void insertWithAlbum(Singer singer) {
+
+    }
 }

@@ -68,6 +68,21 @@ public class AnnotationJdbcTest {
         List<Singer> singers = singerDao.findAll();
         listSingers(singers);
     }
+    @Test
+    public void testSingerInsertWithAlbum(){
+        Singer singer = new Singer();
+        singer.setFirstName("BB");
+        singer.setLastName("King");
+        singer.setBirthDate(new Date((new GregorianCalendar(1940,8,16)).getTime().getTime()));
+        Album album = new Album();
+        album.setTitle("My kind of Blues");
+        album.setReleaseDate(new Date((new GregorianCalendar(1961,7,18)).getTime().getTime()));
+        singer.addAlbum(album);
+        singerDao.insertWithAlbum(singer);
+        List<Singer> singers = singerDao.findAllWithAlbum();
+        listSingers(singers);
+
+    }
     @After
     public void tearDown(){
         ctx.close();

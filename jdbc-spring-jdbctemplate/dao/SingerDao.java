@@ -17,5 +17,6 @@ public interface SingerDao {
     void insertWithDetail(Singer singer);
     List<Singer> findAllWithAlbum();
     String findNameById(Long id);
+    void insertWithAlbum(Singer singer);
 
 }

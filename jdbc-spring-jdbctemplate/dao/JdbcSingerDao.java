@@ -82,8 +82,13 @@ public class JdbcSingerDao implements SingerDao {
                 sql,namedParameters,String.class);
     }
 
+    @Override
+    public void insertWithAlbum(Singer singer) {
 
-    private  static final class SingerWithDetailExtractor implements ResultSetExtractor<List<Singer>>{
+    }
+
+
+    public  static final class SingerWithDetailExtractor implements ResultSetExtractor<List<Singer>>{
 
         @Override
         public List<Singer> extractData(ResultSet rs) throws SQLException, DataAccessException {

@@ -99,6 +99,11 @@ public class JdbcSingerDaoWithRowMapper implements SingerDao, InitializingBean {
     }
 
     @Override
+    public void insertWithAlbum(Singer singer) {
+
+    }
+
+    @Override
     public void afterPropertiesSet() throws Exception {
         if (template==null){
             throw new BeanCreationException("Null" + "NamedParametrJdbcTemplate on SingerDao");
