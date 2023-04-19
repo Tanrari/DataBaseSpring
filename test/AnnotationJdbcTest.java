@@ -35,7 +35,7 @@ public class AnnotationJdbcTest {
     @Test
     public void  testFindAll(){
     List<Singer> singers = singerDao.findAll();
-        assertEquals(5, singers.size());
+        assertEquals(8, singers.size());
     singers.forEach(singer -> {
         System.out.println(singer);
         if (singer.getAlbums()!=null){
@@ -97,6 +97,12 @@ public class AnnotationJdbcTest {
                 }
             }
         });
+    }
+    @Test
+    public void testFindFirstNameById(){
+        String firstName = singerDao.findLastNameById(2L);
+        assertEquals("Eric",firstName);
+        System.out.println("Retrieved value:"+firstName);
     }
 
 

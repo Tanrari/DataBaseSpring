@@ -22,6 +22,7 @@ public class JdbcSingerDao implements SingerDao {
     private InsertSinger insertSinger;
     private  UpdateSinger updateSinger;
     private InsertSingerAlbum insertSingerAlbum;
+    private StoredFunctionFirstNameById storedFunctionFirstNameById;
 
     @Resource(name = "dataSource")
     public void setDataSource (DataSource dataSource){
@@ -30,6 +31,7 @@ public class JdbcSingerDao implements SingerDao {
         this.selectSingerByFirstName = new SelectSingerByFirstName(dataSource);
         this.updateSinger = new UpdateSinger(dataSource);
         this.insertSinger = new InsertSinger(dataSource);
+        this.storedFunctionFirstNameById = new StoredFunctionFirstNameById(dataSource);
 
     }
     @Override
@@ -47,7 +49,9 @@ public class JdbcSingerDao implements SingerDao {
 
     @Override
     public String findLastNameById(Long id) {
-        return null;
+        List<String> result = storedFunctionFirstNameById.execute(id);
+        return  result.get(0);
+
     }
 
     @Override
